@@ -7,7 +7,7 @@ class PWM_DAC:
         self.dynamic_range = dynamic_range
         self.verbose = verbose
 
-        
+
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.gpio_pin, GPIO.OUT, initial = 0)
         self.pwm = GPIO.PWM(self.gpio_pin, pwm_frequency)
