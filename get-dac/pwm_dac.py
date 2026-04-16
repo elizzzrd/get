@@ -7,7 +7,7 @@ class PWM_DAC:
         self.dynamic_range = dynamic_range
         self.verbose = verbose
 
-        
+
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.gpio_pin, GPIO.OUT, initial = 0)
         self.pwm = GPIO.PWM(self.gpio_pin, pwm_frequency)
@@ -27,7 +27,10 @@ class PWM_DAC:
                 print("Устанавливаем 0.0 В")
             self.pwm.ChangeDutyCycle(0.0)
             return
-        self.pwm.ChangeDutyCycle(voltage/self.dynamic_range*100.0)
+        
+        coef = voltage * 100 / self.dynamic_range
+        self.pwm.ChangeDutyCycle(coef)
+        print("Коэффициент заполнения: ", coef)
 
 
 
