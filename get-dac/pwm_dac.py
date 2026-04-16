@@ -27,7 +27,10 @@ class PWM_DAC:
                 print("Устанавливаем 0.0 В")
             self.pwm.ChangeDutyCycle(0.0)
             return
-        self.pwm.ChangeDutyCycle(voltage/self.dynamic_range*100.0)
+        
+        coef = voltage/self.dynamic_range*100.0
+        self.pwm.ChangeDutyCycle(coef)
+        print("Коэффициент заполнения: ", coef)
 
 
 

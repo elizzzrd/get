@@ -20,7 +20,9 @@ def dec2bin(value):
 
 # подаем двоичное представление на вход R2R-ЦАП
 def number_to_dac(number):
-    GPIO.output(dac_bits, dec2bin(number))
+    bits = dec2bin(number)
+    print(f"Число на вход ЦАП: {number}, биты: {bits}")
+    GPIO.output(dac_bits, bits)
 
 try:
     while True:
