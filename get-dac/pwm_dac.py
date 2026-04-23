@@ -5,7 +5,7 @@ class PWM_DAC:
         self.gpio_pin = gpio_pin
         self.pwm_frequency = pwm_frequency
         self.dynamic_range = dynamic_range
-        self.verbose = verbose
+        self.verbose = verbose              # если True -> вывод дополнительной отладочной инфы
 
 
         GPIO.setmode(GPIO.BCM)
