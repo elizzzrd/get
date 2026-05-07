@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import matplotlib.pyplot as plt
 import adc_plot
 from r2r_adc import R2R_ADC
 

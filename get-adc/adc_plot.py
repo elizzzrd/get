@@ -12,6 +12,7 @@ def plot_voltage_vs_time(time, voltage, max_voltage):
     plt.axis((0, np.max(time), 0, max_voltage))
     plt.grid(visible=True)
     plt.show()
+    plt.savefig('grafic.png')
 
 
 def plot_sampling_period_hist(time):
@@ -33,4 +34,5 @@ def plot_sampling_period_hist(time):
     plt.xlim(0, 0.006)
     plt.grid(visible=True)
     plt.show()
+    plt.savefig(('hist'))
     print(np.mean(intervals))
