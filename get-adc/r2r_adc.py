@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import RPi.GPIO as GPIO
 import time
-import adcplot
+import adc_plot
 
 
 #======================================================================
@@ -43,19 +43,38 @@ class R2R_ADC:
         self.number_to_dac(0)
         return num
     
+    def successive_approximation_adc(self):
+        result = 0
+        
+        for i in range(7, -1, -1):          
+            probe = result | (1 << i)       # устанавливаем пробный бит
+            self.number_to_dac(probe)       
+            time.sleep(self.compare_time)
+            
+            if not GPIO.input(self.comp_gpio):  # Uцап <= Uвх
+                result = probe                  # оставляем бит
+            
+        self.number_to_dac(0)
+        return result
+    
 
     def get_sc_voltage(self):
         return self.sequential_counting_adc() * self.dynamic_range / 255
+    
+    def get_sar_voltage(self):
+        return self.successive_approximation_adc() * self.dynamic_range / 255
 
 
 #======================================================================
+
 dynamic_range = 3.3
 
 try:
     adc = R2R_ADC(dynamic_range)
 
     while True:
-        volt = adc.get_sc_voltage()
+        #volt = adc.get_sc_voltage()
+        volt = adc.get_sar_voltage()
         print(f"Напряжение: {volt:.3f} В")
         time.sleep(0.1)
 
