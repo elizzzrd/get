@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def plot_voltage_vs_time(time, voltage, max_voltage):
+
     plt.figure(figsize=(10,6))
     plt.plot(time, voltage)
 
@@ -14,12 +15,18 @@ def plot_voltage_vs_time(time, voltage, max_voltage):
 
 
 def plot_sampling_period_hist(time):
+    
+    plt.figure(figsize=(10,6))
+
     intervals = []
     last = 0
-    for inter in time:
-        intervals.append(inter-last)
-        last = inter
+
+    for sampling_period in time:
+        intervals.append(sampling_period - last)
+        last = sampling_period
     plt.hist(intervals)
+
+    
     plt.suptitle("Распределение периодов дискретизации измерений по времени на одно измерение")
     plt.xlabel("Период измерения, с")
     plt.ylabel("Количество измерений, В")
