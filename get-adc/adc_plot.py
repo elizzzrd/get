@@ -12,12 +12,10 @@ def plot_voltage_vs_time(time, voltage, max_voltage):
     plt.axis((0, np.max(time), 0, max_voltage))
     plt.grid(visible=True)
     plt.show()
-    plt.savefig('grafic.png')
+    
 
 
 def plot_sampling_period_hist(time):
-    
-    plt.figure(figsize=(10,6))
 
     intervals = []
     last = 0
@@ -25,14 +23,15 @@ def plot_sampling_period_hist(time):
     for sampling_period in time:
         intervals.append(sampling_period - last)
         last = sampling_period
-    plt.hist(intervals)
 
     
+    plt.figure(figsize=(10,6))
+    plt.hist(intervals)
     plt.suptitle("Распределение периодов дискретизации измерений по времени на одно измерение")
     plt.xlabel("Период измерения, с")
     plt.ylabel("Количество измерений, В")
-    plt.xlim(0, 0.006)
+    #plt.xlim(0, 0.06)
     plt.grid(visible=True)
     plt.show()
-    plt.savefig(('hist'))
-    print(np.mean(intervals))
+    
+    print(f"mean: {np.mean(intervals)}")

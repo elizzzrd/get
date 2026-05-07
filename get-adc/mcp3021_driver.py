@@ -30,13 +30,13 @@ class MCP3021:
     
 
     def get_voltage(self):
-        return self.get_number() * self.dynamic_range / 255
+        return self.get_number() / 1023*self.dynamic_range
     
 #======================================================================
 # raspi-gpio set 2 a0
 # raspi-gpio set 3 a0
 
-dynamic_range = 3.335
+dynamic_range = 5
 
 if __name__ == "__main__":
     try:
@@ -44,8 +44,8 @@ if __name__ == "__main__":
 
         while True:
             volt = mcp.get_voltage()
-            print(f"Напряжение: {volt} В")
-            time.sleep(0.1)
+            print(f"Напряжение: {volt:.3f} В")
+            time.sleep(0.5)
 
     finally:
         mcp.deinit()

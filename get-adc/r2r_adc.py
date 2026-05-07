@@ -73,8 +73,8 @@ try:
     adc = R2R_ADC(dynamic_range)
 
     while True:
-        volt = adc.get_sc_voltage()
-        #volt = adc.get_sar_voltage()
+        #volt = adc.get_sc_voltage()
+        volt = adc.get_sar_voltage()
         print(f"Напряжение: {volt:.3f} В")
         time.sleep(1)
 
